@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Email Agent - Mammouth IA</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/email_agent.css') }}">
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <a href="/" class="back-button">← Retour</a>
+            <h1>Email Agent</h1>
+        </div>
+        
+        <div id="login-section" class="section">
+            <div class="login-card">
+                <h2>Connexion à Gmail</h2>
+                <p>Connectez-vous avec vos identifiants Gmail pour permettre à l'IA d'accéder à vos emails</p>
+                
+                <form id="gmail-login-form">
+                    <div class="form-group">
+                        <label for="email">Email Gmail</label>
+                        <input type="email" id="email" name="email" placeholder="votre.email@gmail.com" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="password">Mot de passe d'application</label>
+                        <input type="password" id="password" name="password" placeholder="Mot de passe d'application Gmail" required>
+                        <small>Utilisez un <a href="https://support.google.com/accounts/answer/185833" target="_blank">mot de passe d'application</a> généré depuis votre compte Google</small>
+                    </div>
+                    
+                    <button type="submit" class="btn-primary" id="connect-btn">
+                        <span>Se connecter</span>
+                    </button>
+                </form>
+            </div>
+        </div>
+        
+        <div id="email-section" class="section hidden">
+            <div class="email-interface">
+                <div class="sidebar">
+                    <div class="user-info" id="user-info">
+                        <div class="avatar">📧</div>
+                        <div class="user-details">
+                            <span class="user-email" id="connected-email"></span>
+                            <button class="btn-secondary" id="disconnect-btn">Déconnexion</button>
+                        </div>
+                    </div>
+                    
+                    <div class="stats">
+                        <h3>Statistiques</h3>
+                        <div class="stat-item">
+                            <span>Total emails</span>
+                            <span id="total-emails">0</span>
+                        </div>
+                        <div class="stat-item">
+                            <span>Non lus</span>
+                            <span id="unread-emails">0</span>
+                        </div>
+                    </div>
+                    
+                    <button class="btn-primary" id="refresh-emails">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M1 4V10H7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M23 20V14H17" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M20.49 9C19.9828 7.56678 19.1209 6.28536 17.9845 5.27542C16.8482 4.26548 15.4745 3.55976 13.9917 3.22426C12.5089 2.88875 10.9652 2.93434 9.50481 3.35677C8.04437 3.77921 6.71475 4.56473 5.64 5.64L1 10M23 14L18.36 18.36C17.2853 19.4353 15.9556 20.2208 14.4952 20.6432C13.0348 21.0657 11.4911 21.1112 10.0083 20.7757C8.52547 20.4402 7.1518 19.7345 6.01547 18.7246C4.87913 17.7146 4.01717 16.4332 3.51 15" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                        Actualiser
+                    </button>
+                </div>
+                
+                <div class="main-content">
+                    <div class="emails-list" id="emails-list">
+                        <div class="loading" id="loading">
+                            <div class="spinner"></div>
+                            <p>Chargement des emails...</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="ai-assistant">
+                    <h3>Assistant IA</h3>
+                    <div class="chat-messages" id="ai-messages">
+                        <div class="ai-message">
+                            <p>Bonjour ! Je peux vous aider à analyser vos emails. Posez-moi des questions comme :</p>
+                            <ul>
+                                <li>"Résume mes derniers emails"</li>
+                                <li>"Y a-t-il des emails urgents ?"</li>
+                                <li>"Qui m'a écrit récemment ?"</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="chat-input">
+                        <input type="text" id="ai-input" placeholder="Posez une question sur vos emails...">
+                        <button id="ai-send-btn">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M22 2L11 13" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                <path d="M22 2L15 22L11 13L2 9L22 2Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script src="{{ url_for('static', filename='js/email_agent.js') }}"></script>
+</body>
+</html>
